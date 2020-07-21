@@ -31,15 +31,15 @@ void main_main ()
         // ParmParse is way of reading inputs from the inputs file
         ParmParse pp;
 
-        // We need to get n_cell from the inputs file - this is the number of cells on each side of 
-        //   a square (or cubic) domain.
+        // We need to get n_cell from the inputs file - this is the number of 
+        // cells on each side of a square (or cubic) domain.
         pp.get("n_cell",n_cell);
 
         // The domain is broken into boxes of size max_grid_size
         pp.get("max_grid_size",max_grid_size);
 
         // Default plot_int to -1, allow us to set it to something else in the inputs file
-        //  If plot_int < 0 then no plot files will be written
+        // If plot_int < 0 then no plot files will be written
         plot_int = -1;
         pp.query("plot_int",plot_int);
 
@@ -61,7 +61,7 @@ void main_main ()
         // Break up boxarray "ba" into chunks no larger than "max_grid_size" along a direction
         ba.maxSize(max_grid_size);
 
-       // This defines the physical box, [-1,1] in each direction.
+        // This defines the physical box, [-1,1] in each direction.
         RealBox real_box({AMREX_D_DECL(-1.0_rt,-1.0_rt,-1.0_rt)},
                          {AMREX_D_DECL( 1.0_rt, 1.0_rt, 1.0_rt)});
 
@@ -78,7 +78,7 @@ void main_main ()
     // Ncomp = number of components for each array
     int Ncomp  = 1;
   
-    // How Boxes are distrubuted among MPI processes
+    // How Boxes are distributed among MPI processes
     DistributionMapping dm(ba);
 
     // we allocate two phi multifabs; one will store the old state, the other the new.
@@ -123,7 +123,7 @@ void main_main ()
 
         // new_phi = old_phi + dt * (something)
         advance(phi_old, phi_new, flux, dt, geom); 
-        time = time + dt;
+        time += dt;
         
         // Tell the I/O Processor to write out which step we're doing
         amrex::Print() << "Advanced step " << n << "\n";
@@ -136,8 +136,8 @@ void main_main ()
         }
     }
 
-    // Call the timer again and compute the maximum difference between the start time and stop time
-    //   over all processors
+    // Call the timer again and compute the maximum difference between the start 
+    // time and stop time over all processors
     Real stop_time = ParallelDescriptor::second() - strt_time;
     const int IOProc = ParallelDescriptor::IOProcessorNumber();
     ParallelDescriptor::ReduceRealMax(stop_time,IOProc);

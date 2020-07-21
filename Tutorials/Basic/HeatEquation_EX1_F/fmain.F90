@@ -38,7 +38,7 @@ program main
   call amrex_parmparse_destroy(pp)
 
   ! Define a single box covering the domain
-  domain = amrex_box((/0,0,0/), (/n_cell-1, n_cell-1, n_cell-1/))
+  domain = amrex_box([0,0,0], [n_cell-1, n_cell-1, n_cell-1])
 
   ! Initialize the boxarray "ba" from the single box "bx"
   call amrex_boxarray_build(ba, domain)

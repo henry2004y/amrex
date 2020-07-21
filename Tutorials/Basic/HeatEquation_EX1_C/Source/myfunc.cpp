@@ -6,8 +6,8 @@ using namespace amrex;
 
 void advance (MultiFab& phi_old,
               MultiFab& phi_new,
-	      Array<MultiFab, AMREX_SPACEDIM>& flux,
-	      Real dt,
+	          Array<MultiFab, AMREX_SPACEDIM>& flux,
+	          Real dt,
               Geometry const& geom)
 {
 
@@ -23,8 +23,8 @@ void advance (MultiFab& phi_old,
     // 
     // =======================================================
 
-    // This example supports both 2D and 3D.  Otherwise,
-    // we would not need to use AMREX_D_TERM.
+    // This example supports both 2D and 3D. 
+    // Otherwise, we would not need to use AMREX_D_TERM.
     AMREX_D_TERM(const Real dxinv = geom.InvCellSize(0);,
                  const Real dyinv = geom.InvCellSize(1);,
                  const Real dzinv = geom.InvCellSize(2););
